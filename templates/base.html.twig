@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <style>
+            .menu{ width: 100%; background: #fff; text-align: center; border: 1px solid #000;}
+            .menu > a{ display: block; color: #000; border-bottom: 1px solid #000; padding: 5px 0;}
+            .menu > a:hover{ color: #00FFFF; border-bottom: 1px solid #00FFFF;}
+            .menu_ul, .menu_sous_ul, .menu_sous_li{ list-style-type: none; }
+            .menu_ul::after{ content: ""; display: table; clear: both; }
+            .menu_li{ float: left; width: 25%; cursor: pointer; }
+
+            .menu_sous_ul{ display: none; box-shadow: 0px 1px 1px #000;}
+            .menu_sous_ul a{ padding : 5px 0; border-bottom: 1px solid #7393B3; }
+            .menu_sous_ul a:hover{ border-bottom: 1px solid #00FFFF ; background: #ADD8E6;}
+            .menu_sous_li{ float: none; width: 100%; text-align: left; padding: 5px 0;}
+            .menu_li:hover .menu_sous_ul{ display: block;}
+        </style>
+        {% block Menu %}
+            
+            {# pour recuperer article, articles, blog, blogs, category, categories 
+                //app:src:Controller:ArticleController.php                           
+                {% include  'ArticleController.php' %} 
+                {% include  'BlogController.php' %} 
+                {% include  'CategoryController.php' %}  
+            #}
+        
+            <nav class="menu">
+                <ul class="menu_ul">                  
+
+                    <li class="menu_li">Articles
+                        <ul class="menu_sous_ul"> 
+                            {% for article in articles %}
+                                <li class="menu_sous_li"><a href="{{ path('article_index') }}">{{ article.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>              
+                    
+                    {# "Variable "categories" does not exist." #}
+                        {#
+                        <li class="menu_li">Categories
+                            <ul class="menu_sous_ul"> 
+                                {% for category in categories %}
+                                    <li class="menu_sous_li"><a href="{{ path('category_index') }}">{{ Category.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li> 
+
+                        #}{# "Variable "Blogs" does not exist." #}{#
+                        <li class="menu_li">Blog
+                            <ul class="menu_sous_ul"> 
+                                {% for Blog in Blogs %}
+                                    <li class="menu_sous_li"><a href="{{ path('Blog_index') }}">{{ Blog.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>    
+                    #}
+                </ul>
+            </nav>
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
